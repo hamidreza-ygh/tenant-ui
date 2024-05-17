@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant-ui
+spec:
+  selector:
+    matchLabels:
+      app: tenant-ui
+  template:
+    metadata:
+      labels:
+        app: tenant-ui
+        role: user-interface
+    spec:
+      containers:
+        - name: tenant-ui
+          image: ghcr.io/hamidreza-ygh/tenant-ui:latest
+          env:
+            - name: VUE_APP_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ui-secrets
+                  key: VUE_APP_BASE_URL
+            - name: VUE_APP_USER_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ui-secrets
+                  key: VUE_APP_USER_API_URL
+            - name: VUE_APP_TENANT_PROVISION_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ui-secrets
+                  key: VUE_APP_TENANT_PROVISION_URL
+            - name: VUE_APP_GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: ui-secrets
+                  key: VUE_APP_GH_TOKEN
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant-ui
+spec:
+  selector:
+    app: tenant-ui
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+  type: NodePort
