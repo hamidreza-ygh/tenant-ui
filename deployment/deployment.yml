@@ -54,4 +54,28 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-  type: NodePort
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tenant-ui
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: tenantodo.life
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tenant-ui
+                port:
+                  number: 80
+      tls:
+        - hosts:
+            - tenantodo.life
+          secretName: tenantodo-life-tls
