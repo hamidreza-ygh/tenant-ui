@@ -31,7 +31,10 @@ export default {
     }
   },
   async register(body) {
-    console.log("VUE_APP_USER_API_URL", window.__runtime_config__.VUE_APP_USER_API_URL);
+    console.log(
+      "VUE_APP_USER_API_URL",
+      window.__runtime_config__.VUE_APP_USER_API_URL
+    );
     try {
       const response = await instance({
         method: "POST",
