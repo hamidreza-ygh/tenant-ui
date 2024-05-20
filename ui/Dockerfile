@@ -17,13 +17,13 @@ COPY . .
 RUN npm run build
 
 RUN sed -i -e 's/${VUE_APP_USER_API_URL}/'"$VUE_APP_USER_API_URL"'/g' /app/dist/config.js
-CMD [ "npm", "run", "serve" ]
+# CMD [ "npm", "run", "serve" ]
 
-# # production stage
-# FROM nginx:stable-alpine as production-stage
+# production stage
+FROM nginx:stable-alpine as production-stage
 
-# COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# EXPOSE 80
+EXPOSE 80
 
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
