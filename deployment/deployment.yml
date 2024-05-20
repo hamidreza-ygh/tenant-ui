@@ -65,7 +65,7 @@ spec:
   tls:
   - hosts:
       - tenantodo.life
-    secretName: tenantodo-life-tls
+    secretName: tenant-ui-cert
   rules:
     - host: tenantodo.life
       http:
