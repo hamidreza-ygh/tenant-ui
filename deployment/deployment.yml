@@ -76,5 +76,4 @@ spec:
               service:
                 name: tenant-ui
                 port:
-                  name: http
                   number: 80
