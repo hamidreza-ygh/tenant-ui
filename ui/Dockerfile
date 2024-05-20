@@ -16,7 +16,8 @@ COPY . .
 # build app for production with minification
 RUN npm run build
 
-CMD echo "window.__runtime_config__ = { VUE_APP_USER_API_URL: '$VUE_APP_USER_API_URL' };" > /app/dist/config.js && npm run serve
+RUN sed -i -e 's/${VUE_APP_USER_API_URL}/'"$VUE_APP_USER_API_URL"'/g' /app/dist/config.js
+CMD [ "npm", "run", "serve" ]
 
 # # production stage
 # FROM nginx:stable-alpine as production-stage
