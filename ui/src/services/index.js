@@ -31,11 +31,11 @@ export default {
     }
   },
   async register(body) {
-    console.log("VUE_APP_USER_API_URL", process.env.VUE_APP_USER_API_URL);
+    console.log("VUE_APP_USER_API_URL", window.__runtime_config__.VUE_APP_USER_API_URL);
     try {
       const response = await instance({
         method: "POST",
-        url: process.env.VUE_APP_USER_API_URL + "/register",
+        url: window.__runtime_config__.VUE_APP_USER_API_URL + "/register",
         headers: {
           "Content-Type": "application/json",
         },

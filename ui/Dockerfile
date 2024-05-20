@@ -16,11 +16,13 @@ COPY . .
 # build app for production with minification
 RUN npm run build
 
-# production stage
-FROM nginx:stable-alpine as production-stage
+CMD echo "window.__runtime_config__ = { VUE_APP_USER_API_URL: '$VUE_APP_USER_API_URL' };" > /app/dist/config.js && npm run serve
 
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+# # production stage
+# FROM nginx:stable-alpine as production-stage
 
-EXPOSE 80
+# COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-CMD ["nginx", "-g", "daemon off;"]
+# EXPOSE 80
+
+# CMD ["nginx", "-g", "daemon off;"]
