@@ -62,6 +62,10 @@ kind: Ingress
 metadata:
   name: tenant-ui
 spec:
+  tls:
+  - hosts:
+      - tenantodo.life
+    secretName: tenantodo-life-tls
   rules:
     - host: tenantodo.life
       http:
@@ -73,7 +77,3 @@ spec:
                 name: tenant-ui
                 port:
                   number: 80
-      tls:
-        - hosts:
-            - tenantodo.life
-          secretName: tenantodo-life-tls
