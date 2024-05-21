@@ -66,6 +66,9 @@ spec:
   - hosts:
       - tenantodo.life
     secretName: tenant-ui-cert
+  - hosts:
+      - api.tenantodo.life
+    secretName: tenant-manager-cert
   rules:
     - host: tenantodo.life
       http:
