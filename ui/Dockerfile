@@ -20,8 +20,8 @@ RUN npm run build
 FROM nginx:stable-alpine as production-stage
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-COPY /app/util/config.js /usr/share/nginx/html
-COPY /app/util/entrypoint.sh /entrypoint.sh
+COPY util/config.js /usr/share/nginx/html
+COPY util/entrypoint.sh /entrypoint.sh
 # RUN sed -i -e 's/${VUE_APP_USER_API_URL}/'"$VUE_APP_USER_API_URL"'/g' /usr/share/nginx/html/config.js
 EXPOSE 80
 
