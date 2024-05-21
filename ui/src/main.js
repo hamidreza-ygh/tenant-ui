@@ -11,5 +11,7 @@ import "./assets/css/tailwind.css";
 // axios.defaults.baseURL = "http://localhost:3003";
 
 const app = createApp(App);
+const config = window.__runtime_config__ || {};
+app.config.globalProperties.$userApiService = config;
 // app.config.globalProperties.$http = axios;
 app.use(store).use(router).mount("#app");
