@@ -70,14 +70,17 @@ spec:
     - host: tenantodo.life
       http:
         paths:
-          - path: /app
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: tenant-ui
                 port:
                   number: 80
-          - path: /api
+    - host: api.tenantodo.life
+      http:
+        paths:
+          - path: /
             pathType: Prefix
             backend:
               service:
