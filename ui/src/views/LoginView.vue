@@ -121,10 +121,15 @@ export default {
     ...mapMutations(["setUser", "setToken", "setUserId"]),
     login() {
       service
-        .login({
-          username: this.username,
-          password: this.password,
-        })
+        .login(
+          {
+            url: this.$userApiService,
+          },
+          {
+            username: this.username,
+            password: this.password,
+          }
+        )
         .then((response) => {
           const status = response.status;
 

@@ -12,6 +12,7 @@ import "./assets/css/tailwind.css";
 
 const app = createApp(App);
 const config = window.config || {};
+console.log("config", config);
 app.config.globalProperties.$userApiService = config.VUE_APP_USER_API_URL;
-// app.config.globalProperties.$http = axios;
+
 app.use(store).use(router).mount("#app");

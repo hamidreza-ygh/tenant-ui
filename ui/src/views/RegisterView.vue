@@ -164,10 +164,15 @@ export default {
     signUp() {
       if (this.usernameValidation() && this.passwordValidation()) {
         service
-          .register({
-            username: this.username.toLowerCase(),
-            password: this.password,
-          })
+          .register(
+            {
+              url: this.$userApiService,
+            },
+            {
+              username: this.username.toLowerCase(),
+              password: this.password,
+            }
+          )
           .then((response) => {
             const status = response.status;
             console.log("Status", status);
