@@ -77,3 +77,10 @@ spec:
                 name: tenant-ui
                 port:
                   number: 80
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: tenant-manager
+                port:
+                  number: 3000
