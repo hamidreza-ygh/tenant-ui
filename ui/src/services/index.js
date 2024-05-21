@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCurrentInstance } from 'vue';
+import { getCurrentInstance } from "vue";
 
 const options = {};
 // options.baseURL = "http://localhost:3003";
@@ -9,7 +9,8 @@ const options = {};
 //   options.headers.Authorization = 'JWT TOKEN'
 // }
 const vueInstance = getCurrentInstance();
-const userApiService = vueInstance?.appContext.config.globalProperties.$userApiService;
+const userApiService =
+  vueInstance?.appContext.config.globalProperties.$userApiService;
 const instance = axios.create(options);
 // const todoAppBaseUrl = process.env.VUE_APP_TODO_APP_BASE_URL;
 
@@ -34,10 +35,7 @@ export default {
     }
   },
   async register(body) {
-    console.log(
-      "VUE_APP_USER_API_URL",
-      userApiService
-    );
+    console.log("VUE_APP_USER_API_URL", userApiService);
     try {
       const response = await instance({
         method: "POST",
