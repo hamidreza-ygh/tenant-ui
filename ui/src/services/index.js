@@ -52,14 +52,14 @@ export default {
       return error.response;
     }
   },
-  async tenantProvision(body) {
+  async tenantProvision(header, body) {
     try {
       const response = await instance({
         method: "POST",
-        url: process.env.VUE_APP_TENANT_PROVISION_URL,
+        url: header.url,
         headers: {
           Accept: "application/vnd.github+json",
-          Authorization: "token " + process.env.VUE_APP_GH_TOKEN,
+          Authorization: "token " + header.token,
           "X-GitHub-Api-Version": "2022-11-28",
         },
         data: JSON.stringify({

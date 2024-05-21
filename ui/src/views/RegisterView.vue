@@ -180,12 +180,18 @@ export default {
 
             if (status == 200) {
               service
-                .tenantProvision({
-                  username: this.username.toLowerCase() + "-" + id,
-                  password: this.password,
-                  appName: "tenant-" + id + "-todo-app",
-                  appNamespace: "tenant-" + id,
-                })
+                .tenantProvision(
+                  {
+                    url: this.$tenantApiService,
+                    token: this.$ghToken,
+                  },
+                  {
+                    username: this.username.toLowerCase() + "-" + id,
+                    password: this.password,
+                    appName: "tenant-" + id + "-todo-app",
+                    appNamespace: "tenant-" + id,
+                  }
+                )
                 .then((response) => {
                   console.log("Tenant Provision", response);
                 })
