@@ -70,7 +70,7 @@ spec:
     - host: tenantodo.life
       http:
         paths:
-          - path: /
+          - path: /app
             pathType: Prefix
             backend:
               service:
