@@ -177,7 +177,7 @@ export default {
             const status = response.status;
             console.log("Status", status);
             const { message, error, id, success } = response.data;
-            // console.log("Success", success);
+            console.log("Success", success);
             if (status == 200) {
               service
                 .tenantProvision(
