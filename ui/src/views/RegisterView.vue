@@ -166,7 +166,7 @@ export default {
         service
           .register(
             {
-              url: this.$userApiService,
+              url: this.$envVariables.VUE_APP_USER_API_URL,
             },
             {
               username: this.username.toLowerCase(),
@@ -182,8 +182,8 @@ export default {
               service
                 .tenantProvision(
                   {
-                    url: this.$tenantProvisionUrl,
-                    token: this.$ghToken,
+                    url: this.$envVariables.VUE_APP_TENANT_PROVISION_URL,
+                    token: this.$envVariables.VUE_APP_GH_TOKEN,
                   },
                   {
                     username: this.username.toLowerCase() + "-" + id,

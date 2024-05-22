@@ -123,7 +123,7 @@ export default {
       service
         .login(
           {
-            url: this.$userApiService,
+            url: this.$envVariables.VUE_APP_USER_API_URL,
           },
           {
             username: this.username,

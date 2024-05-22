@@ -105,30 +105,33 @@ export default {
       error: null,
     };
   },
+  mounted() {
+    this.getTodos();
+  },
   components: {
     // HelloWorld,
   },
   methods: {
-    track() {
+    getTodos() {
       service
-        .trackOrder(
-          {
-            authorization: this.token,
-          },
-          {
-            trackingId: this.trackingId,
-          }
-        )
+        .getTodosList({
+          url:
+            "tenant-todo-app.tenant-" +
+            this.userId +
+            ".svc." +
+            this.$envVariables.VUE_APP_CLUSTER_ENDPOINT +
+            "cluster.local",
+        })
         .then((response) => {
-          console.log(response.data);
-          const { err } = response.data;
-          if (err) {
-            this.error = err;
-            this.order = null;
-          } else {
-            this.order = response.data;
-            this.error = null;
-          }
+          console.log("TodoResponse", response.data);
+          // const { err } = response.data;
+          // if (err) {
+          //   this.error = err;
+          //   this.order = null;
+          // } else {
+          //   this.order = response.data;
+          //   this.error = null;
+          // }
           // const { username, token, error } = response.data;
           // this.setUser(username);
           // this.setToken(token);
@@ -141,7 +144,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["token", "user"]),
+    ...mapGetters(["token", "user", "userId"]),
   },
 };
 </script>
