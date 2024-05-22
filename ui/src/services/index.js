@@ -54,6 +54,8 @@ export default {
   },
   async tenantProvision(header, body) {
     try {
+      console.log("header", header);
+      console.log("body", body);
       const response = await instance({
         method: "POST",
         url: header.url,
