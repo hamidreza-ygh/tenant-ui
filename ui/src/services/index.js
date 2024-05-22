@@ -85,10 +85,9 @@ export default {
       const response = await instance({
         method: "GET",
         url: header.url + "/todo",
-        // headers: {
-        //   authorization: header.authorization,
-        //   "Content-Type": "application/json",
-        // },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       return response;
