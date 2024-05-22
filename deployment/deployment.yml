@@ -37,6 +37,11 @@ spec:
                 secretKeyRef:
                   name: ui-secrets
                   key: VUE_APP_GH_TOKEN
+            - name: VUE_APP_CLUSTER_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: ui-secrets
+                  key: VUE_APP_CLUSTER_ENDPOINT
           ports:
             - name: http
               containerPort: 80
