@@ -120,7 +120,7 @@ export default {
             this.userId +
             ".svc." +
             this.$envVariables.VUE_APP_CLUSTER_ENDPOINT +
-            ".cluster.local",
+            ".cluster.local:8000",
         })
         .then((response) => {
           console.log("TodoResponse", response.data);
