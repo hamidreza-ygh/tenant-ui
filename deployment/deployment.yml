@@ -67,11 +67,6 @@ kind: Ingress
 metadata:
   name: tenant-ui
 spec:
-  tls:
-  - hosts:
-      - tenantodo.life
-      - api.tenantodo.life
-    secretName: tenant-ui-cert
   rules:
     - host: tenantodo.life
       http:
@@ -93,3 +88,36 @@ spec:
                 name: tenant-manager
                 port:
                   number: 3000
+
+# With TLS CONFIGURATION
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: tenant-ui
+# spec:
+#   tls:
+#   - hosts:
+#       - tenantodo.life
+#       - api.tenantodo.life
+#     secretName: tenant-ui-cert
+#   rules:
+#     - host: tenantodo.life
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: tenant-ui
+#                 port:
+#                   number: 80
+#     - host: api.tenantodo.life
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: tenant-manager
+#                 port:
+#                   number: 3000
