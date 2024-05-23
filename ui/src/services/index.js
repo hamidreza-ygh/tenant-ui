@@ -82,18 +82,36 @@ export default {
   },
   async getTodosList(header) {
     try {
-      const response = await instance({
+      const response = await fetch(header.url + "/todo", {
         method: "GET",
-        url: header.url + "/todo",
         headers: {
           "Content-Type": "application/json",
         },
       });
-
-      return response;
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
     } catch (error) {
-      return error.response;
+      console.error('Error getting todos', error);
+      return null;
     }
+    // try {
+    //   const response = await instance({
+    //     method: "GET",
+    //     url: header.url + "/todo",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+
+    //   return response;
+    // } catch (error) {
+    //   return error.response;
+    // }
   },
   async addTodo(header, body) {
     try {
