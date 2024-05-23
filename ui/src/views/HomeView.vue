@@ -116,7 +116,7 @@ export default {
       service
         .getTodosList({
           url:
-            "http://tenant-todo-app.tenant-" +
+            "tenant-todo-app.tenant-" +
             this.userId +
             ".svc." +
             this.$envVariables.VUE_APP_CLUSTER_ENDPOINT +
