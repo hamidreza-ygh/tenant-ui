@@ -84,7 +84,7 @@ export default {
         method: "GET",
         url: header.url + "/todo",
         headers: {
-          authorization: header.authorization,
+          Authorization: header.authorization,
           "Content-Type": "application/json",
         },
       });
@@ -113,7 +113,7 @@ export default {
         method: "POST",
         url: header.url + "/todo",
         headers: {
-          authorization: header.authorization,
+          Authorization: header.authorization,
           "Content-Type": "application/json",
         },
         data: JSON.stringify({
@@ -132,7 +132,7 @@ export default {
         method: "DELETE",
         url: header.url + "/todo/" + params.id,
         headers: {
-          authorization: header.authorization,
+          Authorization: header.authorization,
           "Content-Type": "application/json",
         },
       });
