@@ -81,21 +81,21 @@ export default {
   async getTodosList(header) {
     try {
       const response = await fetch(`${header.url}/todo`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Authorization': header.authorization,
-          'Content-Type': 'application/json'
-        }
+          Authorization: header.authorization,
+          "Content-Type": "application/json",
+        },
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+
       const data = await response.json();
       console.log(data);
     } catch (error) {
-      console.error('There was an error!', error);
+      console.error("There was an error!", error);
     }
     // try {
     //   const response = await instance({
