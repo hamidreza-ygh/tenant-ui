@@ -10,7 +10,7 @@
         <div class="mt-10">
           <h1 class="text-3xl font-semibold text-gray-600">Todo List</h1>
           <div class="mt-6">
-            <form @submit.prevent="addTodo()">
+            <form @submit.prevent="addTodos()">
               <div class="grid grid-cols-1 gap-4">
                 <div>
                   <input
@@ -58,7 +58,7 @@
                 @click="completedTodo(todo)"
               >
                 <span class="text-gray-600 text-lg font-semibold">{{
-                  todo.text
+                  todo.name
                 }}</span>
               </div>
             </div>
@@ -71,24 +71,24 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-const newTodo = ref("");
-const todos = ref([]);
-function addTodo() {
-  if (newTodo.value !== "") {
-    todos.value.push({
-      complete: false,
-      text: newTodo.value,
-    });
-    newTodo.value = "";
-  }
-}
-function removeAllTodos() {
-  todos.value.splice(0, todos.value.length);
-}
-function completedTodo(todo) {
-  todo.complete = !todo.complete;
-}
+// import { ref } from "vue";
+// const newTodo = ref("");
+// const todos = ref([]);
+// function addTodo() {
+//   if (newTodo.value !== "") {
+//     todos.value.push({
+//       complete: false,
+//       text: newTodo.value,
+//     });
+//     newTodo.value = "";
+//   }
+// }
+// function removeAllTodos() {
+//   todos.value.splice(0, todos.value.length);
+// }
+// function completedTodo(todo) {
+//   todo.complete = !todo.complete;
+// }
 </script>
 
 <script>
@@ -103,6 +103,8 @@ export default {
       trackingId: null,
       order: null,
       error: null,
+      todos: [],
+      newTodo: "",
     };
   },
   mounted() {
@@ -115,15 +117,12 @@ export default {
     getTodos() {
       service
         .getTodosList({
-          url:
-            "http://tenant-todo-app.tenant-" +
-            this.userId +
-            ".svc." +
-            this.$envVariables.VUE_APP_CLUSTER_ENDPOINT +
-            ".cluster.local:8000",
+          url: "http://tenant-" + this.userId + ".tenantodo.life",
+          authorization: this.token,
         })
         .then((response) => {
           console.log("TodoResponse", response.data);
+          this.todos = response.data;
           // const { err } = response.data;
           // if (err) {
           //   this.error = err;
@@ -141,6 +140,32 @@ export default {
           //   this.$router.push("/");
           // }
         });
+    },
+
+    addTodos() {
+      service
+        .addTodo(
+          {
+            url: "http://tenant-" + this.userId + ".tenantodo.life",
+            authorization: this.token,
+          },
+          {
+            name: this.newTodo,
+          }
+        )
+        .then((response) => {
+          console.log("TodoResponse", response.data);
+          const { status, message } = response.data;
+          if (status == true) {
+            this.getTodos();
+          } else {
+            this.error = message;
+          }
+        });
+    },
+    removeAllTodos() {},
+    completedTodo(todo) {
+      console.log("Todo", todo);
     },
   },
   computed: {

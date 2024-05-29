@@ -54,8 +54,6 @@ export default {
   },
   async tenantProvision(header, body) {
     try {
-      console.log("header", header);
-      console.log("body", body);
       const response = await instance({
         method: "POST",
         url: header.url,
@@ -82,22 +80,18 @@ export default {
   },
   async getTodosList(header) {
     try {
-      const response = await fetch(header.url + "/todo", {
+      const response = await instance({
         method: "GET",
+        url: header.url + "/todo",
         headers: {
+          authorization: header.authorization,
           "Content-Type": "application/json",
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
+      return response;
     } catch (error) {
-      console.error("Error getting todos", error);
-      return null;
+      return error.response;
     }
     // try {
     //   const response = await instance({
@@ -117,11 +111,11 @@ export default {
     try {
       const response = await instance({
         method: "POST",
-        url: header.url,
-        // headers: {
-        //   authorization: header.authorization,
-        //   "Content-Type": "application/json",
-        // },
+        url: header.url + "/todo",
+        headers: {
+          authorization: header.authorization,
+          "Content-Type": "application/json",
+        },
         data: JSON.stringify({
           name: body.name,
         }),
@@ -136,11 +130,11 @@ export default {
     try {
       const response = await instance({
         method: "DELETE",
-        url: header.url + "/" + params.id,
-        // headers: {
-        //   authorization: header.authorization,
-        //   "Content-Type": "application/json",
-        // },
+        url: header.url + "/todo/" + params.id,
+        headers: {
+          authorization: header.authorization,
+          "Content-Type": "application/json",
+        },
       });
 
       return response;
