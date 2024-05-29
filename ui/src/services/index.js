@@ -83,7 +83,7 @@ export default {
       const response = await fetch(`${header.url}/todo`, {
         method: "GET",
         headers: {
-          Authorization: header.authorization,
+          authorization: header.authorization,
           "Content-Type": "application/json",
         },
       });
@@ -131,7 +131,7 @@ export default {
         method: "POST",
         url: header.url + "/todo",
         headers: {
-          Authorization: header.authorization,
+          authorization: header.authorization,
           "Content-Type": "application/json",
         },
         data: JSON.stringify({
@@ -150,7 +150,7 @@ export default {
         method: "DELETE",
         url: header.url + "/todo/" + params.id,
         headers: {
-          Authorization: header.authorization,
+          authorization: header.authorization,
           "Content-Type": "application/json",
         },
       });

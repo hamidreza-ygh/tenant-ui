@@ -14,6 +14,7 @@ RUN npm install
 COPY . .
 
 # build app for production with minification
+RUN npm run lint
 RUN npm run build
 
 # production stage
