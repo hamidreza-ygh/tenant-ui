@@ -80,19 +80,37 @@ export default {
   },
   async getTodosList(header) {
     try {
-      const response = await instance({
-        method: "GET",
-        url: header.url + "/todo",
+      const response = await fetch(`${header.url}/todo`, {
+        method: 'GET',
         headers: {
-          Authorization: header.authorization,
-          "Content-Type": "application/json",
-        },
+          'Authorization': header.authorization,
+          'Content-Type': 'application/json'
+        }
       });
-
-      return response;
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data);
     } catch (error) {
-      return error.response;
+      console.error('There was an error!', error);
     }
+    // try {
+    //   const response = await instance({
+    //     method: "GET",
+    //     url: header.url + "/todo",
+    //     headers: {
+    //       Authorization: header.authorization,
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+
+    //   return response;
+    // } catch (error) {
+    //   return error.response;
+    // }
     // try {
     //   const response = await instance({
     //     method: "GET",
