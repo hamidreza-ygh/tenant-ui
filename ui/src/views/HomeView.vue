@@ -156,7 +156,7 @@ export default {
     removeAllTodos() {
       this.todos.forEach((todo) => {
         service
-          .deleteTodo(
+          .removeTodo(
             {
               url: "http://tenant-" + this.userId + ".tenantodo.life",
               authorization: this.token,
