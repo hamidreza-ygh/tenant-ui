@@ -65,7 +65,12 @@
           </div>
         </div>
       </div>
-      <div></div>
+      <div
+            v-if="error"
+            class="text-md text-center text-white uppercase bg-red-500 mt-4 p-2 rounded-md"
+          >
+            {{ error }}
+          </div>
     </div>
   </div>
 </template>
@@ -154,8 +159,8 @@ export default {
           }
         )
         .then((response) => {
-          console.log("TodoResponse", response);
-          const { status, message } = response;
+          console.log("TodoResponse", response.data);
+          const { status, message } = response.data;
           if (status == true) {
             this.getTodos();
           } else {
