@@ -121,8 +121,8 @@ export default {
           authorization: this.token,
         })
         .then((response) => {
-          console.log("TodoResponse", response.data);
-          this.todos = response.data;
+          console.log("TodoResponse", response);
+          this.todos = response;
           // const { err } = response.data;
           // if (err) {
           //   this.error = err;
@@ -154,8 +154,8 @@ export default {
           }
         )
         .then((response) => {
-          console.log("TodoResponse", response.data);
-          const { status, message } = response.data;
+          console.log("TodoResponse", response);
+          const { status, message } = response;
           if (status == true) {
             this.getTodos();
           } else {
