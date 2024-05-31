@@ -165,15 +165,8 @@ export default {
               id: todo.id,
             }
           )
-          .then((response) => {
-            const { status, message } = response.data;
-            if (status == true) {
-              this.getTodos();
-            } else {
-              this.error = message;
-            }
-          });
       });
+      this.todos = [];
     },
     completedTodo(todo) {
       todo.complete = !todo.complete;
