@@ -128,22 +128,6 @@ export default {
         .then((response) => {
           console.log("TodoResponse", response);
           this.todos = response;
-          // const { err } = response.data;
-          // if (err) {
-          //   this.error = err;
-          //   this.order = null;
-          // } else {
-          //   this.order = response.data;
-          //   this.error = null;
-          // }
-          // const { username, token, error } = response.data;
-          // this.setUser(username);
-          // this.setToken(token);
-          // if (error) {
-          //   this.error = error;
-          // } else {
-          //   this.$router.push("/");
-          // }
         });
     },
 
@@ -156,6 +140,7 @@ export default {
           },
           {
             name: this.newTodo,
+            complete: false,
           }
         )
         .then((response) => {
@@ -168,9 +153,30 @@ export default {
           }
         });
     },
-    removeAllTodos() {},
+    removeAllTodos() {
+      this.todos.forEach((todo) => {
+        service
+          .deleteTodo(
+            {
+              url: "http://tenant-" + this.userId + ".tenantodo.life",
+              authorization: this.token,
+            },
+            {
+              id: todo.id,
+            }
+          )
+          .then((response) => {
+            const { status, message } = response.data;
+            if (status == true) {
+              this.getTodos();
+            } else {
+              this.error = message;
+            }
+          });
+      });
+    },
     completedTodo(todo) {
-      console.log("Todo", todo);
+      todo.complete = !todo.complete;
     },
   },
   computed: {
